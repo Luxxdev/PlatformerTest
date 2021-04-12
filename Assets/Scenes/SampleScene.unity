@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 143242832}
   - component: {fileID: 143242831}
   - component: {fileID: 143242830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2270,7 +2270,7 @@ GameObject:
   - component: {fileID: 522568445}
   - component: {fileID: 522568449}
   - component: {fileID: 522568450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2287,8 +2287,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.7
+  m_Height: 2.4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &522568446
@@ -2381,6 +2381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47e586418eb309478a74f912ed5b9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 522568450}
   player2: {fileID: 1589930370}
   playerIndex: 1
   speed: 5
@@ -2389,6 +2390,7 @@ MonoBehaviour:
   _jumping: 0
   _camera1: {fileID: 963194225}
   _camera2: {fileID: 1178851088}
+  isHolding: 0
 --- !u!1001 &531251119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5283,7 +5285,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!65 &1262502693
 BoxCollider:
@@ -5353,7 +5355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262502691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.21, y: 0.35, z: 0.5}
+  m_LocalPosition: {x: -0.21, y: 1.67, z: 0.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6507,7 +6509,7 @@ GameObject:
   - component: {fileID: 1589930366}
   - component: {fileID: 1589930365}
   - component: {fileID: 1589930370}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6540,8 +6542,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.7
+  m_Height: 2.4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1589930367
@@ -6619,6 +6621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 522568450}
+  player2: {fileID: 1589930370}
   playerIndex: 1
   speed: 5
   _rigidbody: {fileID: 1589930365}
@@ -6626,6 +6629,7 @@ MonoBehaviour:
   _jumping: 0
   _camera1: {fileID: 963194225}
   _camera2: {fileID: 1178851088}
+  isHolding: 0
 --- !u!1001 &1590311068
 PrefabInstance:
   m_ObjectHideFlags: 0
