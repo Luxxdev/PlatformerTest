@@ -1,17 +1,8 @@
 ﻿using UnityEngine;
 
-public class Player1 : MonoBehaviour
+public class Player1 : PlayerBase
 {
-    public Player2 player2 = null;
-    public int playerIndex = 1;
-    public float speed = 5.0f;
-    public Rigidbody _rigidbody = null;
-    public float jumpForce = 1.0f;
-    public bool _jumping = false;
-    public GameObject _camera1 = null;
-    public GameObject _camera2 = null;
-
-    void Update()
+    void FixedUpdate()
     {
         if (playerIndex == 1)
         {
@@ -19,6 +10,13 @@ public class Player1 : MonoBehaviour
             direction.x = Input.GetAxis("Horizontal");
             transform.position += direction * (speed * Time.deltaTime);
 
+        }
+    }
+
+    void Update()
+    {
+        if (playerIndex == 1)
+        {
             if (Input.GetKeyUp(KeyCode.Alpha2))
             {
                 ChangePlayer();
@@ -29,20 +27,40 @@ public class Player1 : MonoBehaviour
             {
                 Jump();
             }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                isHolding = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                isHolding = false;
+            }
+
+            if (isHolding)
+            {
+                Debug.Log("TO SEGURANDO");
+            }
         }
     }
 
-    private void Jump()
+    public override void Jump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-    void ChangePlayer()
+    public override void ChangePlayer()
     {
         player2.playerIndex = -1;
         playerIndex = -1;
         _camera1.SetActive(false);
         _camera2.SetActive(true);
+    }
+
+    public override void Interact()
+    {
+
     }
 
 //    private void OnCollisionEnter(Collision other)
