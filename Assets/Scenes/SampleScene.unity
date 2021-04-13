@@ -5172,9 +5172,10 @@ GameObject:
   - component: {fileID: 1247214474}
   - component: {fileID: 1247214473}
   - component: {fileID: 1247214477}
+  - component: {fileID: 1247214478}
   m_Layer: 0
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5190,7 +5191,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.26, y: 12.25, z: 2.68}
+  m_Size: {x: 2.4, y: 12.25, z: 2.68}
   m_Center: {x: 0.000000059604645, y: -4.29, z: 0.7}
 --- !u!23 &1247214474
 MeshRenderer:
@@ -5272,6 +5273,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1247214478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247214472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a49e96585f1f2ff4f9e5c22e0e8aede2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 1558763130}
+  isOpened: 0
+  isMoving: 0
+  doorMaxHeight: 5
+  doorMinHeight: 1
 --- !u!1 &1250507493
 GameObject:
   m_ObjectHideFlags: 0
@@ -5473,7 +5491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262502691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.96, y: 1.67, z: 0.5}
+  m_LocalPosition: {x: 2.05, y: 1.67, z: 0.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}

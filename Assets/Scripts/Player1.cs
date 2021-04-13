@@ -35,10 +35,14 @@ public class Player1 : PlayerBase
             {
                 isInteracting = true;
                 isHolding = true;
+            }
+         
+            if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyDown(KeyCode.Alpha2))
+            {
                 isInteracting = false;
             }
 
-            if (Input.GetKey(KeyCode.E) == false)
+            if (Input.GetKey(KeyCode.E) == false || Input.GetKeyDown(KeyCode.Alpha2))
             {
                 isHolding = false;
             }
@@ -59,8 +63,8 @@ public class Player1 : PlayerBase
         _camera1.SetActive(false);
         _camera2.SetActive(true);
     }
-    
-    public void OnCollisionStay(Collision other)
+
+    public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Box"))
         {
@@ -87,11 +91,19 @@ public class Player1 : PlayerBase
 
         if (other.gameObject.CompareTag("Button"))
         {
+            Button button = other.gameObject.GetComponent<Button>();
 
+            if (button != null)
+            {
+                if (isInteracting)
+                {
+                    button.Pressed();
+                }
+            }
         }
     }
 
-    public void OnCollisionExit(Collision other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Box"))
         {
