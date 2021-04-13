@@ -25,12 +25,17 @@ public class Player2 : PlayerBase
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Jump();
+                if (_jumping == false)
+                {
+                    Jump();
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                isInteracting = true;
                 isHolding = true;
+                isInteracting = false;
             }
 
             if (Input.GetKeyUp(KeyCode.E))
@@ -38,16 +43,13 @@ public class Player2 : PlayerBase
                 isHolding = false;
             }
 
-            if (isHolding)
-            {
-                Debug.Log("TO SEGURANDO");
-            }
         }
     }
 
     public override void Jump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //_jumping = true;
     }
 
     public override void ChangePlayer()
@@ -59,20 +61,65 @@ public class Player2 : PlayerBase
 
     }
 
+    public void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Box"))
+        {
+            Box box = other.gameObject.GetComponent<Box>();
 
+            if (box != null)
+            {
+                if (_jumping == false)
+                {
+                    if (isHolding)
+                    {
+                        box.transform.SetParent(transformPlayer2);
+                        box.BeingManipulated();
+                    }
 
-    //    private void OnCollisionEnter(Collision other)
-    //    {
-    //        if (other.gameObject.CompareTag("Floor"))
-    //        {
-    //            RaycastHit hit = Physics.Raycast(transform.localPosition, 0.5f, Vector2.down, 1.0f, 1 << 8);
-    //
-    //            if (hit.collider == other.collider)
-    //            {
-    //              _jumping = false;
-    //
-    //            }
-    //        }
-    //    } //PROBLEMA
+                    if (isHolding == false)
+                    {
+                        box.transform.parent = null;
+                        box.Freeze();
+                    }
+                }
+            }
+        }
+
+        if (other.gameObject.CompareTag("Button"))
+        {
+
+        }
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Box"))
+        {
+            Box box = other.gameObject.GetComponent<Box>();
+
+            if (box != null)
+            {
+                box.Freeze();
+            }
+        }
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 1.0f, 1 << 8))
+            {
+                if (hit.collider == other.collider)
+                {
+                    Debug.Log("LIBEROU PULO");
+                    _jumping = false;
+
+                }
+            }
+        }
+    }
 }
 

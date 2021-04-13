@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 
 public class Player1 : PlayerBase
 {
@@ -26,7 +25,10 @@ public class Player1 : PlayerBase
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Jump();
+                if (_jumping == false)
+                {
+                    Jump();
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.E))
@@ -36,7 +38,7 @@ public class Player1 : PlayerBase
                 isInteracting = false;
             }
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) == false)
             {
                 isHolding = false;
             }
@@ -47,6 +49,7 @@ public class Player1 : PlayerBase
     public override void Jump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //_jumping = true;
     }
 
     public override void ChangePlayer()
@@ -81,20 +84,42 @@ public class Player1 : PlayerBase
                 }
             }
         }
-    }
-   
 
-//    private void OnCollisionEnter(Collision other)
-//    {
-//        if (other.gameObject.CompareTag("Floor"))
-//        {
-//           RaycastHit hit = Physics.Raycast(transform.localPosition, 0.5f, Vector3.down, 1.0f, 1 << 8);
-//
-//            if (hit.collider == other.collider)
-//            {
-//              _jumping = false;
-//
-//            }
-//        }
-//    } //PROBLEMA
+        if (other.gameObject.CompareTag("Button"))
+        {
+
+        }
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Box"))
+        {
+            Box box = other.gameObject.GetComponent<Box>();
+
+            if (box != null)
+            {
+                box.Freeze();
+            }
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 1.0f, 1 << 8))
+            {
+                if (hit.collider == other.collider)
+                {
+                    Debug.Log("LIBEROU PULO");
+                    _jumping = false;
+
+                }
+            }
+        }
+    } 
 }
