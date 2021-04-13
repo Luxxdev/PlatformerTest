@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class Player1 : PlayerBase
 {
@@ -30,7 +31,9 @@ public class Player1 : PlayerBase
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                isInteracting = true;
                 isHolding = true;
+                isInteracting = false;
             }
 
             if (Input.GetKeyUp(KeyCode.E))
@@ -38,10 +41,6 @@ public class Player1 : PlayerBase
                 isHolding = false;
             }
 
-            if (isHolding)
-            {
-                Debug.Log("TO SEGURANDO");
-            }
         }
     }
 
@@ -57,17 +56,39 @@ public class Player1 : PlayerBase
         _camera1.SetActive(false);
         _camera2.SetActive(true);
     }
-
-    public override void Interact()
+    
+    public void OnCollisionStay(Collision other)
     {
+        if (other.gameObject.CompareTag("Box"))
+        {
+            Box box = other.gameObject.GetComponent<Box>();
 
+            if (box != null)
+            {
+                if (_jumping == false)
+                {
+                    if (isHolding)
+                    {
+                        box.transform.SetParent(transformPlayer1);
+                        box.BeingManipulated();
+                    }
+
+                    if (isHolding == false)
+                    {
+                        box.transform.parent = null;
+                        box.Freeze();
+                    }
+                }
+            }
+        }
     }
+   
 
 //    private void OnCollisionEnter(Collision other)
 //    {
 //        if (other.gameObject.CompareTag("Floor"))
 //        {
-//            RaycastHit hit = Physics.Raycast(transform.localPosition, 0.5f, Vector2.down, 1.0f, 1 << 8);
+//           RaycastHit hit = Physics.Raycast(transform.localPosition, 0.5f, Vector3.down, 1.0f, 1 << 8);
 //
 //            if (hit.collider == other.collider)
 //            {

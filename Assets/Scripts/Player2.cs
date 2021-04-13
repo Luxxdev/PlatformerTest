@@ -59,10 +59,7 @@ public class Player2 : PlayerBase
 
     }
 
-    public override void Interact()
-    {
 
-    }
 
     //    private void OnCollisionEnter(Collision other)
     //    {

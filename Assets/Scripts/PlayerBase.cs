@@ -6,6 +6,8 @@ public abstract class PlayerBase : MonoBehaviour
 {
     public Player1 player1 = null;
     public Player2 player2 = null;
+    public Transform transformPlayer1 = null;
+    public Transform transformPlayer2 = null;
     public int playerIndex = 1;
     public float speed = 5.0f;
     public Rigidbody _rigidbody = null;
@@ -14,6 +16,7 @@ public abstract class PlayerBase : MonoBehaviour
     public GameObject _camera1 = null;
     public GameObject _camera2 = null;
     public bool isHolding = false;
+    public bool isInteracting = false;
 
     public abstract void Jump();
 
@@ -21,7 +24,8 @@ public abstract class PlayerBase : MonoBehaviour
     public abstract void ChangePlayer();
     
 
-    public abstract void Interact();
+    
+
     
 
     //    private void OnCollisionEnter(Collision other)
