@@ -20,7 +20,7 @@ public class Player2 : PlayerBase
             if (Input.GetKeyUp(KeyCode.Alpha1))
             {
                 ChangePlayer();
-                Debug.Log("MUDEI PRO PLAYER 2");
+                Debug.Log("MUDEI PRO PLAYER 1");
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -35,10 +35,14 @@ public class Player2 : PlayerBase
             {
                 isInteracting = true;
                 isHolding = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyDown(KeyCode.Alpha2))
+            {
                 isInteracting = false;
             }
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) == false || Input.GetKeyDown(KeyCode.Alpha2))
             {
                 isHolding = false;
             }
@@ -58,10 +62,22 @@ public class Player2 : PlayerBase
         playerIndex = 1;
         _camera2.SetActive(false);
         _camera1.SetActive(true);
-
     }
 
-    public void OnCollisionStay(Collision other)
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                button.Pressed();
+            }
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Box"))
         {
@@ -88,11 +104,30 @@ public class Player2 : PlayerBase
 
         if (other.gameObject.CompareTag("Button"))
         {
+            Button button = other.gameObject.GetComponent<Button>();
 
+            if (button != null)
+            {
+                if (isInteracting)
+                {
+                    button.Pressed();
+                }
+            }
         }
+
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                button.Pressed();
+            }
+        }
+
     }
 
-    public void OnCollisionExit(Collision other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Box"))
         {
@@ -103,7 +138,18 @@ public class Player2 : PlayerBase
                 box.Freeze();
             }
         }
+
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            FloorButton button = other.gameObject.GetComponent<FloorButton>();
+
+            if (button != null)
+            {
+                button.Unpressed();
+            }
+        }
     }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Floor"))
@@ -122,4 +168,3 @@ public class Player2 : PlayerBase
         }
     }
 }
-
