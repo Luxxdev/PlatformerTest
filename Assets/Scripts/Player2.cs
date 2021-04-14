@@ -34,7 +34,6 @@ public class Player2 : PlayerBase
             if (Input.GetKeyDown(KeyCode.E))
             {
                 isInteracting = true;
-                isHolding = true;
             }
 
             if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyDown(KeyCode.Alpha2))
@@ -87,14 +86,16 @@ public class Player2 : PlayerBase
             {
                 if (_jumping == false)
                 {
-                    if (isHolding)
+                    if (isInteracting)
                     {
+                        isHolding = true;
                         box.transform.SetParent(transformPlayer2);
                         box.BeingManipulated();
                     }
 
-                    if (isHolding == false)
+                    if (isInteracting == false)
                     {
+                        isHolding = false;
                         box.transform.parent = null;
                         box.Freeze();
                     }
@@ -110,7 +111,10 @@ public class Player2 : PlayerBase
             {
                 if (isInteracting)
                 {
-                    button.Pressed();
+                    if(isHolding == false)
+                    {
+                        button.Pressed();
+                    }
                 }
             }
         }
