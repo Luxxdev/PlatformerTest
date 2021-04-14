@@ -2,6 +2,11 @@
 
 public class Player2 : PlayerBase
 {
+    private void Start()
+    {
+        speed = normalSpeed;
+    }
+
     void FixedUpdate()
     {
         if (playerIndex == -1)
@@ -20,34 +25,39 @@ public class Player2 : PlayerBase
             if (Input.GetKeyUp(KeyCode.Alpha1))
             {
                 ChangePlayer();
-                Debug.Log("MUDEI PRO PLAYER 2");
+                Debug.Log("MUDEI PRO PLAYER 1");
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Jump();
+                if (_jumping == false)
+                {
+                    Jump();
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                isHolding = true;
+                isInteracting = true;
             }
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                isInteracting = false;
+            }
+
+            if (Input.GetKey(KeyCode.E) == false || Input.GetKeyDown(KeyCode.Alpha2))
             {
                 isHolding = false;
             }
 
-            if (isHolding)
-            {
-                Debug.Log("TO SEGURANDO");
-            }
         }
     }
 
     public override void Jump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        _jumping = true;
     }
 
     public override void ChangePlayer()
@@ -56,26 +66,130 @@ public class Player2 : PlayerBase
         playerIndex = 1;
         _camera2.SetActive(false);
         _camera1.SetActive(true);
-
     }
 
-    public override void Interact()
+    public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                button.Pressed();
+            }
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Box"))
+        {
+            Box box = other.gameObject.GetComponent<Box>();
+
+            if (box != null)
+            {
+                if (_jumping == false)
+                {
+                    if (isInteracting)
+                    {
+                        isHolding = true;
+                        speed = holdingSpeed;
+                        box.transform.SetParent(transformPlayer2);
+                        box.BeingManipulated();
+                    }
+
+                    if (isInteracting == false)
+                    {
+                        isHolding = false;
+                        speed = normalSpeed;
+                        box.transform.parent = null;
+                        box.Freeze();
+                    }
+                }
+            }
+        }
+
+        if (other.gameObject.CompareTag("Button"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                if (isInteracting)
+                {
+                    if(isHolding == false)
+                    {
+                        button.Pressed();
+                    }
+                }
+            }
+        }
+
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                button.Pressed();
+            }
+        }
 
     }
 
-    //    private void OnCollisionEnter(Collision other)
-    //    {
-    //        if (other.gameObject.CompareTag("Floor"))
-    //        {
-    //            RaycastHit hit = Physics.Raycast(transform.localPosition, 0.5f, Vector2.down, 1.0f, 1 << 8);
-    //
-    //            if (hit.collider == other.collider)
-    //            {
-    //              _jumping = false;
-    //
-    //            }
-    //        }
-    //    } //PROBLEMA
-}
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Box"))
+        {
+            Box box = other.gameObject.GetComponent<Box>();
 
+            if (box != null)
+            {
+                box.Freeze();
+            }
+        }
+
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            FloorButton button = other.gameObject.GetComponent<FloorButton>();
+
+            if (button != null)
+            {
+                button.Unpressed();
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 2.0f, 1 << 8))
+            {
+                if (hit.collider == other.collider)
+                {
+                    Debug.Log("LIBEROU PULO");
+                    _jumping = false;
+
+                }
+            }
+        }
+
+        if (other.gameObject.CompareTag("Box"))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 2.0f, 1 << 10))
+            {
+                if (hit.collider == other.collider)
+                {
+                    Debug.Log("LIBEROU PULO");
+                    _jumping = false;
+                }
+            }
+        }
+    }
+}
