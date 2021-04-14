@@ -2,6 +2,8 @@
 
 public class Player1 : PlayerBase
 {
+    public Transform transformPlayer1 = null;
+
     private void Start()
     {
         speed = normalSpeed;

@@ -6,8 +6,6 @@ public abstract class PlayerBase : MonoBehaviour
 {
     public Player1 player1 = null;
     public Player2 player2 = null;
-    public Transform transformPlayer1 = null;
-    public Transform transformPlayer2 = null;
     public int playerIndex = 1;
     public float speed = 5.0f;
     public float holdingSpeed = 1.0f;
