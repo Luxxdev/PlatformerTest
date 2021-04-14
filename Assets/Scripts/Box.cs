@@ -5,10 +5,6 @@ using UnityEngine;
 public class Box : MonoBehaviour
 {
     public Rigidbody _rigidbody = null;
-    void Update()
-    {
-        
-    }
 
     public void BeingManipulated() 
     {
@@ -24,4 +20,29 @@ public class Box : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                button.Pressed();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            FloorButton button = other.gameObject.GetComponent<FloorButton>();
+
+            if (button != null)
+            {
+                button.Unpressed();
+            }
+        }
+    }
 }
