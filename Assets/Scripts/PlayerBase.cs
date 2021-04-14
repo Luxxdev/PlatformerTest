@@ -10,6 +10,8 @@ public abstract class PlayerBase : MonoBehaviour
     public Transform transformPlayer2 = null;
     public int playerIndex = 1;
     public float speed = 5.0f;
+    public float holdingSpeed = 1.0f;
+    public float normalSpeed = 1.0f;
     public Rigidbody _rigidbody = null;
     public float jumpForce = 1.0f;
     public bool _jumping = false;

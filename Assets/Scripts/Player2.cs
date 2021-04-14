@@ -2,6 +2,11 @@
 
 public class Player2 : PlayerBase
 {
+    private void Start()
+    {
+        speed = normalSpeed;
+    }
+
     void FixedUpdate()
     {
         if (playerIndex == -1)
@@ -52,7 +57,7 @@ public class Player2 : PlayerBase
     public override void Jump()
     {
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        //_jumping = true;
+        _jumping = true;
     }
 
     public override void ChangePlayer()
@@ -89,6 +94,7 @@ public class Player2 : PlayerBase
                     if (isInteracting)
                     {
                         isHolding = true;
+                        speed = holdingSpeed;
                         box.transform.SetParent(transformPlayer2);
                         box.BeingManipulated();
                     }
@@ -96,6 +102,7 @@ public class Player2 : PlayerBase
                     if (isInteracting == false)
                     {
                         isHolding = false;
+                        speed = normalSpeed;
                         box.transform.parent = null;
                         box.Freeze();
                     }
@@ -160,13 +167,27 @@ public class Player2 : PlayerBase
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 1.0f, 1 << 8))
+            if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 2.0f, 1 << 8))
             {
                 if (hit.collider == other.collider)
                 {
                     Debug.Log("LIBEROU PULO");
                     _jumping = false;
 
+                }
+            }
+        }
+
+        if (other.gameObject.CompareTag("Box"))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 2.0f, 1 << 10))
+            {
+                if (hit.collider == other.collider)
+                {
+                    Debug.Log("LIBEROU PULO");
+                    _jumping = false;
                 }
             }
         }

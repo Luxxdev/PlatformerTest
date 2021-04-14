@@ -9,15 +9,12 @@ public class Box : MonoBehaviour
     public void BeingManipulated() 
     {
         _rigidbody.constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-        Debug.Log("MANIPULADA");
     }
 
     public void Freeze()
     {
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         transform.parent = null;
-        Debug.Log("PAREI");
-
     }
 
     private void OnTriggerStay(Collider other)

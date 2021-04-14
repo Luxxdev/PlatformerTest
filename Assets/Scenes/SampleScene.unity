@@ -2386,9 +2386,11 @@ MonoBehaviour:
   transformPlayer1: {fileID: 522568448}
   transformPlayer2: {fileID: 0}
   playerIndex: 1
-  speed: 5
+  speed: 1
+  holdingSpeed: 2
+  normalSpeed: 5
   _rigidbody: {fileID: 522568449}
-  jumpForce: 6
+  jumpForce: 8
   _jumping: 0
   _camera1: {fileID: 963194225}
   _camera2: {fileID: 1178851088}
@@ -3450,7 +3452,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e37e7b62fc800724e9dd63e9a7608658, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3487,7 +3489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759831412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.8, y: -0.19, z: -0.0465459}
+  m_LocalPosition: {x: 3.8, y: -0.32, z: -0.0465459}
   m_LocalScale: {x: 1.5, y: 0.21, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7126,9 +7128,11 @@ MonoBehaviour:
   transformPlayer1: {fileID: 0}
   transformPlayer2: {fileID: 1589930369}
   playerIndex: 1
-  speed: 5
+  speed: 1
+  holdingSpeed: 2
+  normalSpeed: 5
   _rigidbody: {fileID: 1589930365}
-  jumpForce: 6
+  jumpForce: 8
   _jumping: 0
   _camera1: {fileID: 963194225}
   _camera2: {fileID: 1178851088}
