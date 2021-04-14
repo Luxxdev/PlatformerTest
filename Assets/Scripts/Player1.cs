@@ -64,6 +64,19 @@ public class Player1 : PlayerBase
         _camera2.SetActive(true);
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                button.Pressed();
+            }
+        }
+    }
+
     public void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Box"))
@@ -101,6 +114,17 @@ public class Player1 : PlayerBase
                 }
             }
         }
+
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            Button button = other.gameObject.GetComponent<Button>();
+
+            if (button != null)
+            {
+                button.Pressed();
+            }
+        }
+
     }
 
     public void OnTriggerExit(Collider other)
@@ -112,6 +136,16 @@ public class Player1 : PlayerBase
             if (box != null)
             {
                 box.Freeze();
+            }
+        }
+
+        if (other.gameObject.CompareTag("FloorButton"))
+        {
+            FloorButton button = other.gameObject.GetComponent<FloorButton>();
+
+            if (button != null)
+            {
+                button.Unpressed();
             }
         }
     }
