@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1525919076109649570}
   - component: {fileID: 1525919076109649582}
   m_Layer: 0
-  m_Name: FloorButton1
+  m_Name: FloorButton
   m_TagString: FloorButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   interactable: {fileID: 0}
   isOpened: 0
   isMoving: 0
-  MaxHeight: 5
-  MinHeight: 1
+  MaxHeight: 8
+  MinHeight: 4
+  horizontalMove: 0
   playerOnButton: 0
