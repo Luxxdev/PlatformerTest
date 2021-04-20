@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 2109325667392039908}
   - component: {fileID: 2109325667392039909}
   - component: {fileID: 2109325667392039910}
-  - component: {fileID: 2109325667392039906}
   - component: {fileID: 2109325667392039905}
   m_Layer: 0
-  m_Name: Button1
+  m_Name: InteractButton
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,25 +94,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4, y: 12.25, z: 2.68}
   m_Center: {x: 0.000000059604645, y: -4.29, z: 0.7}
---- !u!95 &2109325667392039906
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109325667392039911}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2109325667392039905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +111,4 @@ MonoBehaviour:
   isMoving: 0
   MaxHeight: 5
   MinHeight: 1
+  horizontalMove: 0
