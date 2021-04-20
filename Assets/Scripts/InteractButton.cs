@@ -20,18 +20,38 @@ public class InteractButton : Button
             }
         }
 
-        if (interactable.transform.position.y > MaxHeight)
+        if(horizontalMove == false)
         {
-            interactable.transform.position = new Vector3(interactable.transform.position.x, MaxHeight, interactable.transform.position.z);
-            isMoving = false;
-            isOpened = true;
-        }
+            if (interactable.transform.position.y > MaxHeight)
+            {
+                interactable.transform.position = new Vector3(interactable.transform.position.x, MaxHeight, interactable.transform.position.z);
+                isMoving = false;
+                isOpened = true;
+            }
 
-        if (interactable.transform.position.y < MinHeight)
+            if (interactable.transform.position.y < MinHeight)
+            {
+                interactable.transform.position = new Vector3(interactable.transform.position.x, MinHeight, interactable.transform.position.z);
+                isMoving = false;
+                isOpened = false;
+            }
+        }
+        
+        if(horizontalMove == true)
         {
-            interactable.transform.position = new Vector3(interactable.transform.position.x, MinHeight, interactable.transform.position.z);
-            isMoving = false;
-            isOpened = false;
+            if (interactable.transform.position.x > MaxHeight)
+            {
+                interactable.transform.position = new Vector3(MaxHeight, interactable.transform.position.y, interactable.transform.position.z);
+                isMoving = false;
+                isOpened = true;
+            }
+
+            if (interactable.transform.position.x < MinHeight)
+            {
+                interactable.transform.position = new Vector3(MinHeight, interactable.transform.position.y, interactable.transform.position.z);
+                isMoving = false;
+                isOpened = false;
+            }
         }
      
     }

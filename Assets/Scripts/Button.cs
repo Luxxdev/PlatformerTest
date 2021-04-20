@@ -9,6 +9,7 @@ public abstract class Button : MonoBehaviour
     public bool isMoving = false;
     public float MaxHeight = 5.0f;
     public float MinHeight = 1.0f;
+    public bool horizontalMove = false;
 
     public abstract void Pressed();
     
