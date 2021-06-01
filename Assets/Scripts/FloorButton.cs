@@ -8,7 +8,7 @@ public class FloorButton : Button
 
 
     void Update()
-    {
+    { 
         if (playerOnButton == true)
         {
             if (isMoving == true)
@@ -49,13 +49,12 @@ public class FloorButton : Button
 
     }
 
-
     public override void Pressed()
     {
         Debug.Log("tofuncionando");
         playerOnButton = true;
 
-        if(isOpened == false)
+        if (isOpened == false)
         {
             isMoving = true;
             isOpened = true;

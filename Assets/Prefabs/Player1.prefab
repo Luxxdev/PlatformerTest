@@ -94,7 +94,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.6
-  m_Height: 2.2
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5380885737012132298
@@ -127,8 +127,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 5380885737012132297}
   player2: {fileID: 0}
-  transformPlayer1: {fileID: 5380885737012132299}
-  transformPlayer2: {fileID: 0}
   playerIndex: 1
   speed: 1
   holdingSpeed: 2
@@ -140,6 +138,7 @@ MonoBehaviour:
   _camera2: {fileID: 0}
   isHolding: 0
   isInteracting: 0
+  transformPlayer1: {fileID: 5380885737012132299}
 --- !u!1 &5380885737587480506
 GameObject:
   m_ObjectHideFlags: 0

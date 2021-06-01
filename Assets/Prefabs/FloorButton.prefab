@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable: {fileID: 0}
+  canBeActivated: 1
   isOpened: 0
   isMoving: 0
   MaxHeight: 8

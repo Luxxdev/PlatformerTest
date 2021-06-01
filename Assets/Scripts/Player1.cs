@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player1 : PlayerBase
 {
@@ -171,7 +172,50 @@ public class Player1 : PlayerBase
         }
     }
 
+    private void OnCollisionStay(Collision other)
+    {
+        if (_jumping)
+        {
+            if (other.gameObject.CompareTag("Floor"))
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 2.0f, 1 << 8))
+                {
+                    if (hit.collider == other.collider)
+                    {
+                        Debug.Log("LIBEROU PULO");
+                        _jumping = false;
+
+                    }
+                }
+            }
+
+            if (other.gameObject.CompareTag("Box"))
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(transform.localPosition, Vector3.down, out hit, 2.0f, 1 << 10))
+                {
+                    if (hit.collider == other.collider)
+                    {
+                        Debug.Log("LIBEROU PULO");
+                        _jumping = false;
+                    }
+                }
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("Victory");
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
     {
         if (other.gameObject.CompareTag("Floor"))
         {
@@ -182,7 +226,7 @@ public class Player1 : PlayerBase
                 if (hit.collider == other.collider)
                 {
                     Debug.Log("LIBEROU PULO");
-                    _jumping = false;
+                    _jumping = true;
 
                 }
             }
@@ -197,9 +241,9 @@ public class Player1 : PlayerBase
                 if (hit.collider == other.collider)
                 {
                     Debug.Log("LIBEROU PULO");
-                    _jumping = false;
+                    _jumping = true;
                 }
             }
         }
-    } 
+    }
 }
